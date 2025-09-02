@@ -78,7 +78,7 @@ const Header = () => {
   const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % slides.length);
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-full overflow-x-hidden">
       {/* Navbar */}
       <header className="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
@@ -215,6 +215,7 @@ const Header = () => {
               src="/rice2.jpg"
               alt="Rice"
               className="w-full h-auto object-cover rounded-2xl"
+              data-aos="flip-left"
             />
           </div>
 
@@ -222,7 +223,9 @@ const Header = () => {
             className="w-full md:w-1/2 text-white space-y-4 text-center md:text-left"
             data-aos="fade-left"
           >
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Our Rice Story</h2>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">
+              Our Rice Story
+            </h2>
             <p className="text-base sm:text-lg md:text-xl leading-relaxed">
               For generations, our family has been dedicated to bringing premium
               quality rice directly to your table. Each grain is carefully
@@ -239,7 +242,10 @@ const Header = () => {
       </section>
 
       {/* Featured Products */}
-      <section className="relative w-full py-12 sm:py-20 bg-gray-50" data-aos="fade-up">
+      <section
+        className="relative w-full py-12 sm:py-20 bg-gray-50"
+        data-aos="fade-up"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2
             className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-8 sm:mb-12"
@@ -260,7 +266,9 @@ const Header = () => {
                 data-aos="flip-left"
               />
               <h3 className="text-lg sm:text-xl font-semibold mt-4">Rice 1</h3>
-              <p className="text-red-600 font-bold mt-2 text-sm sm:text-base">₹399.00</p>
+              <p className="text-red-600 font-bold mt-2 text-sm sm:text-base">
+                ₹399.00
+              </p>
               <button className="mt-3 sm:mt-4 w-full bg-gray-900 text-white py-2 rounded hover:bg-purple-600 transition text-sm sm:text-base">
                 🛒 ADD TO CART
               </button>
@@ -278,7 +286,9 @@ const Header = () => {
                 data-aos="flip-left"
               />
               <h3 className="text-lg sm:text-xl font-semibold mt-4">Rice 2</h3>
-              <p className="text-red-600 font-bold mt-2 text-sm sm:text-base">₹499.00</p>
+              <p className="text-red-600 font-bold mt-2 text-sm sm:text-base">
+                ₹499.00
+              </p>
               <button className="mt-3 sm:mt-4 w-full bg-gray-900 text-white py-2 rounded hover:bg-purple-600 transition text-sm sm:text-base">
                 🛒 ADD TO CART
               </button>
@@ -296,7 +306,9 @@ const Header = () => {
                 data-aos="flip-left"
               />
               <h3 className="text-lg sm:text-xl font-semibold mt-4">Rice 3</h3>
-              <p className="text-red-600 font-bold mt-2 text-sm sm:text-base">₹799.00</p>
+              <p className="text-red-600 font-bold mt-2 text-sm sm:text-base">
+                ₹799.00
+              </p>
               <button className="mt-3 sm:mt-4 w-full bg-gray-900 text-white py-2 rounded hover:bg-purple-600 transition text-sm sm:text-base">
                 🛒 ADD TO CART
               </button>
@@ -313,16 +325,28 @@ const Header = () => {
               MyBrand
             </h2>
             <div className="flex flex-wrap justify-center md:justify-start space-x-4 sm:space-x-6">
-              <a href="#home" className="hover:text-purple-500 transition-colors">
+              <a
+                href="#home"
+                className="hover:text-purple-500 transition-colors"
+              >
                 Home
               </a>
-              <a href="#about" className="hover:text-purple-500 transition-colors">
+              <a
+                href="#about"
+                className="hover:text-purple-500 transition-colors"
+              >
                 About
               </a>
-              <a href="#services" className="hover:text-purple-500 transition-colors">
+              <a
+                href="#services"
+                className="hover:text-purple-500 transition-colors"
+              >
                 Services
               </a>
-              <a href="#contact" className="hover:text-purple-500 transition-colors">
+              <a
+                href="#contact"
+                className="hover:text-purple-500 transition-colors"
+              >
                 Contact
               </a>
             </div>
