@@ -7,10 +7,11 @@ const Header = () => {
   const [showButton, setShowButton] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+
   useEffect(() => {
     AOS.init({
-      duration: 700, // animation duration in ms
-      once: true, // whether animation should happen only once
+      duration: 700,
+      once: true,
     });
   }, []);
 
@@ -22,10 +23,7 @@ const Header = () => {
 
   const typingSpeed = 100;
   const pauseTime = 1500;
-
   const navLinks = ["Home", "About", "Services", "Contact"];
-
-  // Slideshow images from public folder
   const slides = [
     "/slide1.jpg",
     "/slide2.jpg",
@@ -67,7 +65,7 @@ const Header = () => {
     type();
   }, []);
 
-  // Simple slideshow auto-change
+  // Slideshow auto-change
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % slides.length);
@@ -75,28 +73,20 @@ const Header = () => {
     return () => clearInterval(interval);
   }, [slides.length]);
 
-  const prevSlide = () => {
+  const prevSlide = () =>
     setCurrentIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  };
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % slides.length);
-  };
+  const nextSlide = () => setCurrentIndex((prev) => (prev + 1) % slides.length);
 
   return (
-    <div
-      className="relative w-full bg-cover bg-center bg-fixed"
-      style={{ backgroundImage: "url('/rice.jpg')" }}
-    >
+    <div className="relative w-full">
       {/* Navbar */}
-      <header className="relative z-20">
+      <header className="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="text-white font-bold text-2xl tracking-wider z-20">
               MyBrand
             </div>
 
-            {/* Desktop Menu */}
             <nav className="hidden md:flex space-x-8 z-20">
               {navLinks.map((link) => (
                 <a
@@ -109,7 +99,6 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Mobile Hamburger */}
             <button
               className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 z-20"
               onClick={toggleMenu}
@@ -133,7 +122,6 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         <div
           className={`md:hidden absolute top-16 left-0 w-full bg-black/70 backdrop-blur-md overflow-hidden transition-all duration-500 ${
             isOpen ? "max-h-60" : "max-h-0"
@@ -154,95 +142,58 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Typing Text + Button */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-screen space-y-6">
-        <h1 className="text-white text-4xl md:text-6xl font-bold text-center tracking-wide">
-          {text}
-          <span className="animate-blink">|</span>
-        </h1>
-
-        <a
-          href="#shop"
-          className={`bg-white text-purple-600 font-bold px-6 py-3 rounded-full text-lg transition-all duration-700 ${
-            showButton
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 -translate-y-4 pointer-events-none"
-          } hover:bg-purple-600 hover:text-white`}
-        >
-          Shop Now
-        </a>
-      </div>
-
-      {/* Story Section */}
-      <section className="relative w-full py-20">
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div
-              className="w-full md:w-1/2 overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105"
-              data-aos="fade-right"
-            >
-              <img
-                src="/rice2.jpg"
-                alt="Rice"
-                className="w-full h-auto object-cover"
-              />
-            </div>
-
-            <div
-              className="w-full md:w-1/2 text-white space-y-4"
-              data-aos="fade-left"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold">Our Rice Story</h2>
-              <p className="text-lg md:text-xl leading-relaxed">
-                For generations, our family has been dedicated to bringing
-                premium quality rice directly to your table. Each grain is
-                carefully selected, cleaned, and packed to ensure freshness,
-                taste, and nutrition.
-              </p>
-              <p className="text-lg md:text-xl leading-relaxed">
-                Whether it's for daily meals or special occasions, we promise
-                rice that enhances every dish. Taste the difference and enjoy
-                the richness of pure, wholesome grains with every bite.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Simple Slideshow */}
-      <section
-        className="relative w-[70vw] h-[80vh] max-w-4xl mx-auto py-20 bg-black/80 rounded-lg"
-        data-aos="fade-up-left"
-      >
-        <div className="relative flex items-center justify-center">
-          <button
-            onClick={prevSlide}
-            className="absolute left-2 top-1/2 transform -translate-y-1/2 text-white bg-black/50 p-2 rounded-full"
-          >
-            &#10094;
-          </button>
-
+      {/* Hero Section with Typing Text Overlay */}
+      <section className="relative w-full h-screen overflow-hidden">
+        {slides.map((slide, index) => (
           <img
-            src={slides[currentIndex]}
-            alt={`Slide ${currentIndex + 1}`}
-            className="w-full h-64 md:h-96 object-cover rounded-full"
+            key={index}
+            src={slide}
+            alt={`Slide ${index + 1}`}
+            className={`w-full h-screen object-cover transition-opacity duration-1000 ease-in-out absolute top-0 left-0 ${
+              index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+            }`}
           />
+        ))}
 
-          <button
-            onClick={nextSlide}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-white bg-black/50 p-2 rounded-full"
+        {/* Overlay Text */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 z-20 px-4 text-center">
+          <h1 className="text-white text-4xl md:text-6xl font-bold tracking-wide">
+            {text}
+            <span className="animate-blink">|</span>
+          </h1>
+          <a
+            href="#shop"
+            className={`mt-6 bg-white text-purple-600 font-bold px-6 py-3 rounded-full text-lg transition-all duration-700 ${
+              showButton
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-4 pointer-events-none"
+            } hover:bg-purple-600 hover:text-white`}
           >
-            &#10095;
-          </button>
+            Shop Now
+          </a>
         </div>
+
+        {/* Hero Slideshow Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-black/40 p-3 rounded-full hover:bg-purple-600 transition z-20"
+        >
+          &#10094;
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-black/40 p-3 rounded-full hover:bg-purple-600 transition z-20"
+        >
+          &#10095;
+        </button>
 
         {/* Indicators */}
-        <div className="flex justify-center mt-4 space-x-2">
+        <div className="absolute bottom-10 w-full flex justify-center space-x-3 z-20">
           {slides.map((_, index) => (
             <span
               key={index}
-              className={`w-3 h-3 rounded-full cursor-pointer ${
-                index === currentIndex ? "bg-white" : "bg-gray-400"
+              className={`w-4 h-4 rounded-full cursor-pointer transition-all duration-300 ${
+                index === currentIndex ? "bg-white scale-125" : "bg-gray-400"
               }`}
               onClick={() => setCurrentIndex(index)}
             ></span>
@@ -250,7 +201,152 @@ const Header = () => {
         </div>
       </section>
 
-      {/* Animations */}
+      {/* Story Section */}
+      <section className="relative w-full py-20 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8">
+          <div
+            className="w-full md:w-1/2 overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105"
+            data-aos="fade-right"
+          >
+            <img
+              src="/rice2.jpg"
+              alt="Rice"
+              className="w-full h-auto object-cover rounded-4xl"
+            />
+          </div>
+
+          <div
+            className="w-full md:w-1/2 text-white space-y-4"
+            data-aos="fade-left"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold">Our Rice Story</h2>
+            <p className="text-lg md:text-xl leading-relaxed">
+              For generations, our family has been dedicated to bringing premium
+              quality rice directly to your table. Each grain is carefully
+              selected, cleaned, and packed to ensure freshness, taste, and
+              nutrition.
+            </p>
+            <p className="text-lg md:text-xl leading-relaxed">
+              Whether it's for daily meals or special occasions, we promise rice
+              that enhances every dish. Taste the difference and enjoy the
+              richness of pure, wholesome grains with every bite.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Product Categories Section */}
+      <section className="relative w-full py-20 bg-gray-50" data-aos="fade-up">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2
+            className="text-4xl font-extrabold text-gray-900 mb-12"
+            data-aos="flip-left"
+          >
+            FEATURED PRODUCT CATEGORIES
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {/* Product 1 */}
+            <div
+              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105"
+              data-aos="fade-left"
+            >
+              <img
+                src="/shop1.png"
+                alt="Rice 1"
+                className="w-full h-56 object-cover rounded"
+                data-aos="flip-left"
+              />
+              <h3 className="text-xl font-semibold mt-4">Rice 1</h3>
+              <p className="text-red-600 font-bold mt-2">₹399.00</p>
+              <button className="mt-4 w-full bg-gray-900 text-white py-2 rounded hover:bg-purple-600 transition">
+                🛒 ADD TO CART
+              </button>
+            </div>
+
+            {/* Product 2 */}
+            <div
+              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105"
+              data-aos="fade-up"
+            >
+              <img
+                src="/shop2.png"
+                alt="Rice 2"
+                className="w-full h-56 object-cover rounded"
+                data-aos="flip-left"
+              />
+              <h3 className="text-xl font-semibold mt-4">Rice 2</h3>
+              <p className="text-red-600 font-bold mt-2">₹499.00</p>
+              <button className="mt-4 w-full bg-gray-900 text-white py-2 rounded hover:bg-purple-600 transition">
+                🛒 ADD TO CART
+              </button>
+            </div>
+
+            {/* Product 3 */}
+            <div
+              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105"
+              data-aos="fade-right"
+            >
+              <img
+                src="/shop3.png"
+                alt="Rice 3"
+                className="w-full h-56 object-cover rounded"
+                data-aos="flip-left"
+              />
+              <h3 className="text-xl font-semibold mt-4">Rice 3</h3>
+              <p className="text-red-600 font-bold mt-2">₹799.00</p>
+              <button className="mt-4 w-full bg-gray-900 text-white py-2 rounded hover:bg-purple-600 transition">
+                🛒 ADD TO CART
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Footer Section */}
+      <footer className="bg-gray-900 text-gray-400 py-8 mt-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            {/* Logo / Brand */}
+            <h2 className="text-white font-bold text-xl tracking-wide">
+              MyBrand
+            </h2>
+
+            {/* Navigation Links */}
+            <div className="flex space-x-6">
+              <a
+                href="#home"
+                className="hover:text-purple-500 transition-colors"
+              >
+                Home
+              </a>
+              <a
+                href="#about"
+                className="hover:text-purple-500 transition-colors"
+              >
+                About
+              </a>
+              <a
+                href="#services"
+                className="hover:text-purple-500 transition-colors"
+              >
+                Services
+              </a>
+              <a
+                href="#contact"
+                className="hover:text-purple-500 transition-colors"
+              >
+                Contact
+              </a>
+            </div>
+
+            {/* Copyright */}
+            <p className="text-sm text-gray-500">
+              © {new Date().getFullYear()} MyBrand. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
+
+      {/* Blinking cursor animation */}
       <style>
         {`
           @keyframes blink {
