@@ -81,24 +81,26 @@ const Header = () => {
     <div className="relative w-full">
       {/* Navbar */}
       <header className="fixed top-0 left-0 w-full z-50 bg-black/50 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="text-white font-bold text-2xl tracking-wider z-20">
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-14 sm:h-16">
+            <div className="text-white font-bold text-lg sm:text-2xl tracking-wider z-20">
               MyBrand
             </div>
 
-            <nav className="hidden md:flex space-x-8 z-20">
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex space-x-6 z-20">
               {navLinks.map((link) => (
                 <a
                   key={link}
                   href={`#${link.toLowerCase()}`}
-                  className="text-white px-3 py-2 font-medium text-lg hover:text-purple-300 transition-colors duration-300"
+                  className="text-white px-2 sm:px-3 py-2 font-medium text-base sm:text-lg hover:text-purple-300 transition-colors duration-300"
                 >
                   {link}
                 </a>
               ))}
             </nav>
 
+            {/* Mobile Hamburger */}
             <button
               className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 z-20"
               onClick={toggleMenu}
@@ -122,12 +124,13 @@ const Header = () => {
           </div>
         </div>
 
+        {/* Mobile Nav */}
         <div
-          className={`md:hidden absolute top-16 left-0 w-full bg-black/70 backdrop-blur-md overflow-hidden transition-all duration-500 ${
+          className={`md:hidden absolute top-14 sm:top-16 left-0 w-full bg-black/70 backdrop-blur-md overflow-hidden transition-all duration-500 ${
             isOpen ? "max-h-60" : "max-h-0"
           }`}
         >
-          <nav className="flex flex-col px-4 py-4 space-y-2">
+          <nav className="flex flex-col px-4 py-3 space-y-2">
             {navLinks.map((link) => (
               <a
                 key={link}
@@ -142,28 +145,28 @@ const Header = () => {
         </div>
       </header>
 
-      {/* Hero Section with Typing Text Overlay */}
-      <section className="relative w-full h-screen overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative w-full h-[90vh] sm:h-screen overflow-hidden">
         {slides.map((slide, index) => (
           <img
             key={index}
             src={slide}
             alt={`Slide ${index + 1}`}
-            className={`w-full h-screen object-cover transition-opacity duration-1000 ease-in-out absolute top-0 left-0 ${
+            className={`w-full h-full object-cover transition-opacity duration-1000 ease-in-out absolute top-0 left-0 ${
               index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           />
         ))}
 
         {/* Overlay Text */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/30 z-20 px-4 text-center">
-          <h1 className="text-white text-4xl md:text-6xl font-bold tracking-wide">
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 z-20 px-3 sm:px-6 text-center">
+          <h1 className="text-white text-2xl sm:text-4xl md:text-6xl font-bold tracking-wide leading-snug sm:leading-tight">
             {text}
             <span className="animate-blink">|</span>
           </h1>
           <a
             href="#shop"
-            className={`mt-6 bg-white text-purple-600 font-bold px-6 py-3 rounded-full text-lg transition-all duration-700 ${
+            className={`mt-4 sm:mt-6 bg-white text-purple-600 font-bold px-4 sm:px-6 py-2 sm:py-3 rounded-full text-base sm:text-lg transition-all duration-700 ${
               showButton
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 -translate-y-4 pointer-events-none"
@@ -173,26 +176,26 @@ const Header = () => {
           </a>
         </div>
 
-        {/* Hero Slideshow Arrows */}
+        {/* Hero Arrows */}
         <button
           onClick={prevSlide}
-          className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white bg-black/40 p-3 rounded-full hover:bg-purple-600 transition z-20"
+          className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-white bg-black/40 p-2 sm:p-3 rounded-full hover:bg-purple-600 transition z-20"
         >
           &#10094;
         </button>
         <button
           onClick={nextSlide}
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white bg-black/40 p-3 rounded-full hover:bg-purple-600 transition z-20"
+          className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-white bg-black/40 p-2 sm:p-3 rounded-full hover:bg-purple-600 transition z-20"
         >
           &#10095;
         </button>
 
         {/* Indicators */}
-        <div className="absolute bottom-10 w-full flex justify-center space-x-3 z-20">
+        <div className="absolute bottom-6 sm:bottom-10 w-full flex justify-center space-x-2 sm:space-x-3 z-20">
           {slides.map((_, index) => (
             <span
               key={index}
-              className={`w-4 h-4 rounded-full cursor-pointer transition-all duration-300 ${
+              className={`w-2.5 sm:w-4 h-2.5 sm:h-4 rounded-full cursor-pointer transition-all duration-300 ${
                 index === currentIndex ? "bg-white scale-125" : "bg-gray-400"
               }`}
               onClick={() => setCurrentIndex(index)}
@@ -202,7 +205,7 @@ const Header = () => {
       </section>
 
       {/* Story Section */}
-      <section className="relative w-full py-20 bg-gray-900">
+      <section className="relative w-full py-12 sm:py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-8">
           <div
             className="w-full md:w-1/2 overflow-hidden rounded-lg shadow-lg transform transition duration-700 hover:scale-105"
@@ -211,22 +214,22 @@ const Header = () => {
             <img
               src="/rice2.jpg"
               alt="Rice"
-              className="w-full h-auto object-cover rounded-4xl"
+              className="w-full h-auto object-cover rounded-2xl"
             />
           </div>
 
           <div
-            className="w-full md:w-1/2 text-white space-y-4"
+            className="w-full md:w-1/2 text-white space-y-4 text-center md:text-left"
             data-aos="fade-left"
           >
-            <h2 className="text-3xl md:text-4xl font-bold">Our Rice Story</h2>
-            <p className="text-lg md:text-xl leading-relaxed">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Our Rice Story</h2>
+            <p className="text-base sm:text-lg md:text-xl leading-relaxed">
               For generations, our family has been dedicated to bringing premium
               quality rice directly to your table. Each grain is carefully
               selected, cleaned, and packed to ensure freshness, taste, and
               nutrition.
             </p>
-            <p className="text-lg md:text-xl leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl leading-relaxed">
               Whether it's for daily meals or special occasions, we promise rice
               that enhances every dish. Taste the difference and enjoy the
               richness of pure, wholesome grains with every bite.
@@ -235,111 +238,95 @@ const Header = () => {
         </div>
       </section>
 
-      {/* Featured Product Categories Section */}
-      <section className="relative w-full py-20 bg-gray-50" data-aos="fade-up">
+      {/* Featured Products */}
+      <section className="relative w-full py-12 sm:py-20 bg-gray-50" data-aos="fade-up">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2
-            className="text-4xl font-extrabold text-gray-900 mb-12"
+            className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 mb-8 sm:mb-12"
             data-aos="flip-left"
           >
             FEATURED PRODUCT CATEGORIES
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
             {/* Product 1 */}
             <div
-              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105"
+              className="bg-white p-4 sm:p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105"
               data-aos="fade-left"
             >
               <img
                 src="/shop1.png"
                 alt="Rice 1"
-                className="w-full h-56 object-cover rounded"
+                className="w-full h-44 sm:h-56 object-cover rounded"
                 data-aos="flip-left"
               />
-              <h3 className="text-xl font-semibold mt-4">Rice 1</h3>
-              <p className="text-red-600 font-bold mt-2">₹399.00</p>
-              <button className="mt-4 w-full bg-gray-900 text-white py-2 rounded hover:bg-purple-600 transition">
+              <h3 className="text-lg sm:text-xl font-semibold mt-4">Rice 1</h3>
+              <p className="text-red-600 font-bold mt-2 text-sm sm:text-base">₹399.00</p>
+              <button className="mt-3 sm:mt-4 w-full bg-gray-900 text-white py-2 rounded hover:bg-purple-600 transition text-sm sm:text-base">
                 🛒 ADD TO CART
               </button>
             </div>
 
             {/* Product 2 */}
             <div
-              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105"
+              className="bg-white p-4 sm:p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105"
               data-aos="fade-up"
             >
               <img
                 src="/shop2.png"
                 alt="Rice 2"
-                className="w-full h-56 object-cover rounded"
+                className="w-full h-44 sm:h-56 object-cover rounded"
                 data-aos="flip-left"
               />
-              <h3 className="text-xl font-semibold mt-4">Rice 2</h3>
-              <p className="text-red-600 font-bold mt-2">₹499.00</p>
-              <button className="mt-4 w-full bg-gray-900 text-white py-2 rounded hover:bg-purple-600 transition">
+              <h3 className="text-lg sm:text-xl font-semibold mt-4">Rice 2</h3>
+              <p className="text-red-600 font-bold mt-2 text-sm sm:text-base">₹499.00</p>
+              <button className="mt-3 sm:mt-4 w-full bg-gray-900 text-white py-2 rounded hover:bg-purple-600 transition text-sm sm:text-base">
                 🛒 ADD TO CART
               </button>
             </div>
 
             {/* Product 3 */}
             <div
-              className="bg-white p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105"
+              className="bg-white p-4 sm:p-6 rounded-lg shadow hover:shadow-lg transition transform hover:scale-105"
               data-aos="fade-right"
             >
               <img
                 src="/shop3.png"
                 alt="Rice 3"
-                className="w-full h-56 object-cover rounded"
+                className="w-full h-44 sm:h-56 object-cover rounded"
                 data-aos="flip-left"
               />
-              <h3 className="text-xl font-semibold mt-4">Rice 3</h3>
-              <p className="text-red-600 font-bold mt-2">₹799.00</p>
-              <button className="mt-4 w-full bg-gray-900 text-white py-2 rounded hover:bg-purple-600 transition">
+              <h3 className="text-lg sm:text-xl font-semibold mt-4">Rice 3</h3>
+              <p className="text-red-600 font-bold mt-2 text-sm sm:text-base">₹799.00</p>
+              <button className="mt-3 sm:mt-4 w-full bg-gray-900 text-white py-2 rounded hover:bg-purple-600 transition text-sm sm:text-base">
                 🛒 ADD TO CART
               </button>
             </div>
           </div>
         </div>
       </section>
-      {/* Footer Section */}
-      <footer className="bg-gray-900 text-gray-400 py-8 mt-10">
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-gray-400 py-6 sm:py-8 mt-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            {/* Logo / Brand */}
-            <h2 className="text-white font-bold text-xl tracking-wide">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+            <h2 className="text-white font-bold text-lg sm:text-xl tracking-wide">
               MyBrand
             </h2>
-
-            {/* Navigation Links */}
-            <div className="flex space-x-6">
-              <a
-                href="#home"
-                className="hover:text-purple-500 transition-colors"
-              >
+            <div className="flex flex-wrap justify-center md:justify-start space-x-4 sm:space-x-6">
+              <a href="#home" className="hover:text-purple-500 transition-colors">
                 Home
               </a>
-              <a
-                href="#about"
-                className="hover:text-purple-500 transition-colors"
-              >
+              <a href="#about" className="hover:text-purple-500 transition-colors">
                 About
               </a>
-              <a
-                href="#services"
-                className="hover:text-purple-500 transition-colors"
-              >
+              <a href="#services" className="hover:text-purple-500 transition-colors">
                 Services
               </a>
-              <a
-                href="#contact"
-                className="hover:text-purple-500 transition-colors"
-              >
+              <a href="#contact" className="hover:text-purple-500 transition-colors">
                 Contact
               </a>
             </div>
-
-            {/* Copyright */}
-            <p className="text-sm text-gray-500">
+            <p className="text-xs sm:text-sm text-gray-500">
               © {new Date().getFullYear()} MyBrand. All rights reserved.
             </p>
           </div>
