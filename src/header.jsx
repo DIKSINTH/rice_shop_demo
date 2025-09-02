@@ -262,7 +262,7 @@ const Header = () => {
               <img
                 src="/shop1.png"
                 alt="Rice 1"
-                className="w-full h-44 sm:h-56 object-cover rounded"
+                className="w-full h-48 sm:h-60  rounded"
                 data-aos="flip-left"
               />
               <h3 className="text-lg sm:text-xl font-semibold mt-4">Rice 1</h3>
@@ -282,7 +282,7 @@ const Header = () => {
               <img
                 src="/shop2.png"
                 alt="Rice 2"
-                className="w-full h-44 sm:h-56 object-cover rounded"
+                className="w-full h-48 sm:h-60  rounded"
                 data-aos="flip-left"
               />
               <h3 className="text-lg sm:text-xl font-semibold mt-4">Rice 2</h3>
@@ -302,7 +302,7 @@ const Header = () => {
               <img
                 src="/shop3.png"
                 alt="Rice 3"
-                className="w-full h-44 sm:h-56 object-cover rounded"
+                className="w-full h-48 sm:h-60  rounded"
                 data-aos="flip-left"
               />
               <h3 className="text-lg sm:text-xl font-semibold mt-4">Rice 3</h3>
